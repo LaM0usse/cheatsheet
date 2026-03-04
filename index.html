@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La CheatSheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">la cheatsheet</div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#" class="nav-link active" data-page="home">Accueil</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="enumeration">Énumération</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="webvuln">Vulnérabilités</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="shells">Exécution</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="privesc">Élévation de privilèges</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="utilities">Utilitaires</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" title="Basculer le mode sombre">
+                <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="input-section">
+        <div class="input-container">
+            <div class="input-grid">
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">IP</span>
+                        <input type="text" id="ip" placeholder="192.168.45.xx" title="Votre IP (attaquant)">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">TARGET</span>
+                        <input type="text" id="target" placeholder="asio" title="IP de la cible">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">URL</span>
+                        <input type="text" id="url" placeholder="http://asio" title="URL de la cible">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">PORT</span>
+                        <input type="text" id="port" placeholder="8080">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">USER</span>
+                        <input type="text" id="user" placeholder="admin">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">PASSWORD</span>
+                        <input type="password" id="password" placeholder="********">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">WORDLIST</span>
+                        <input type="text" id="wordlist" placeholder="/path/to/wordlist.txt">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <span class="input-label">DIRLIST</span>
+                        <input type="text" id="dirlist" placeholder="/path/to/dirlist.txt">
+                    </div>
+                </div>
+            </div>
+            <button class="btn-clear" id="clearBtn" title="Effacer tous les champs">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+                <span>Effacer</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="left-panel">
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav" id="sidebarNav">
+            </nav>
+        </aside>
+    </div>
+
+    <div class="content-section">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
