@@ -14,7 +14,7 @@ let config = {
 document.addEventListener('DOMContentLoaded', () => {
     loadConfig();
     loadTheme();
-    setupNavigation();
+    setupNavigation(); // Moved here
     setupInputEvents();
     setupClearButton();
     setupThemeToggle();
@@ -25,22 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Navigation setup
 function setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navMenu = document.querySelector('.nav-menu');
+    if (!navMenu) return;
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Remove active class from all links
-            navLinks.forEach(l => l.classList.remove('active'));
-            
-            // Add active class to clicked link
-            link.classList.add('active');
-            
-            // Load corresponding page
-            const pageId = link.getAttribute('data-page');
-            loadPageContent(pageId);
-        });
+    navMenu.addEventListener('click', (e) => {
+        const link = e.target.closest('.nav-link');
+        if (!link) return;
+
+        e.preventDefault();
+        
+        // Remove active class from all links
+        navMenu.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        
+        // Add active class to clicked link
+        link.classList.add('active');
+        
+        // Load corresponding page
+        const pageId = link.getAttribute('data-page');
+        loadPageContent(pageId);
     });
 }
 
@@ -299,8 +301,8 @@ function updateSidebar() {
     // Clear current sidebar links
     sidebar.innerHTML = '';
     
-    // Get all h2 elements from the active page
-    const headings = activePage.querySelectorAll('h2');
+    // Get all h2 and h3 elements inside card headers from the active page
+    const headings = activePage.querySelectorAll('.card-header h2, .card-header h3');
     
     if (headings.length === 0) {
         // If no headings, hide sidebar or show message
@@ -330,9 +332,18 @@ function updateSidebar() {
             
             // Add active class to clicked link
             link.classList.add('active');
-            
-            // Smooth scroll to section
-            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Find the card corresponding au titre
+            const card = heading.closest('.card') || heading;
+
+            // Si c'est une card «collapsible», on l'ouvre
+            if (card.classList.contains('collapsible')) {
+                card.classList.remove('collapsed');
+            }
+
+            // Laisser le navigateur gérer le scroll via l'ancre
+            // (plus robuste et cohérent pour toutes les pages)
+            window.location.hash = heading.id;
         });
         
         sidebar.appendChild(link);
@@ -353,7 +364,7 @@ window.addEventListener('scroll', () => {
         const activePage = document.querySelector('.page.active');
         if (!activePage) return;
         
-        const headings = activePage.querySelectorAll('h2');
+        const headings = activePage.querySelectorAll('.card-header h2, .card-header h3');
         const sidebar = document.getElementById('sidebarNav');
         if (!sidebar) return;
         
@@ -387,10 +398,9 @@ async function loadPageContent(pageId) {
     const pageFiles = {
         'home': 'pages/home.html',
         'enumeration': 'pages/enumeration.html',
-        'web-vuln': 'pages/webvuln.html',
+        'webvuln': 'pages/webvuln.html',
         'shells': 'pages/shells.html',
-        'privesc': 'pages/privesc.html',
-        'utilities': 'pages/utilities.html'
+        'other': 'pages/other.html'
     };
     
     const pageFile = pageFiles[pageId];
@@ -403,8 +413,8 @@ async function loadPageContent(pageId) {
         // Show loading state
         contentSection.innerHTML = '<div class="page active"><p>Chargement...</p></div>';
         
-        // Fetch page content
-        const response = await fetch(pageFile);
+        // Fetch page content (no cache to voir les dernières modifs)
+        const response = await fetch(`${pageFile}?t=${Date.now()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

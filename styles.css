@@ -5,27 +5,32 @@
 }
 
 :root {
-    --md-hue: 250;
-    --bg-gradient-start: #f5f5f5;
-    --bg-gradient-end: #f5f5f5;
-    --text-color: #1a1a1a;
-    --text-secondary: #666666;
-    --card-bg: #ffffff;
-    --navbar-bg: #ffffff;
-    --border-color: #e0e0e0;
+    --md-hue: 255;
+    /* Mode clair : gris très léger + texte adouci */
+    --bg-gradient-start: #f4f5f7;
+    --bg-gradient-end: #e9ecf1;
+    --text-color: #151518;
+    --text-secondary: #6b7280;
+    --card-bg: #fdfdfd;
+    --navbar-bg: #f9fafb;
+    --border-color: #d1d5db;
     --violet-color: #8b5cf6;
     --violet-dark: #7c3aed;
     --violet-light: #a78bfa;
     --input-bg: #ffffff;
-    --shadow: rgba(0, 0, 0, 0.08);
-    --code-bg: #2d2d2d;
+    --shadow: rgba(15, 23, 42, 0.08);
+    --code-bg: #111827;
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    background: radial-gradient(circle at top, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 55%, #020617 100%);
     min-height: 100vh;
     color: var(--text-color);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -37,6 +42,7 @@ h4,
 h5,
 h6 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    letter-spacing: 0.03em;
 }
 
 code,
@@ -44,21 +50,21 @@ pre {
     font-family: 'JetBrains Mono', SFMono-Regular, Consolas, Menlo, monospace;
 }
 
-/* Dark Mode */
+/* Dark Mode : fond très sombre, texte gris clair, accent violet */
 body.dark-mode {
-    --bg-gradient-start: hsla(var(--md-hue), 20%, 10%, 1);
-    --bg-gradient-end: hsla(var(--md-hue), 20%, 10%, 1);
-    --text-color: #e8e8e8;
-    --text-secondary: #a0a0a0;
-    --card-bg: hsla(var(--md-hue), 15%, 15%, 1);
-    --navbar-bg: hsla(var(--md-hue), 18%, 12%, 1);
-    --border-color: hsla(var(--md-hue), 15%, 20%, 1);
-    --violet-color: #a78bfa;
-    --violet-dark: #c4b5fd;
-    --violet-light: #ddd6fe;
-    --input-bg: hsla(var(--md-hue), 15%, 18%, 1);
-    --shadow: rgba(0, 0, 0, 0.4);
-    --code-bg: hsla(var(--md-hue), 20%, 8%, 1);
+    --bg-gradient-start: #050816;
+    --bg-gradient-end: #020617;
+    --text-color: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --card-bg: #0b1120;
+    --navbar-bg: #020617;
+    --border-color: #1f2937;
+    --violet-color: #a855f7;
+    --violet-dark: #7c3aed;
+    --violet-light: #c4b5fd;
+    --input-bg: #020617;
+    --shadow: rgba(0, 0, 0, 0.7);
+    --code-bg: #020617;
 }
 
 /* Navbar Styles */
@@ -379,28 +385,32 @@ body.dark-mode {
 
 .card {
     background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
+    padding: 1.75rem 1.8rem;
+    border-radius: 16px;
     margin-bottom: 1.5rem;
-    box-shadow: 0 8px 32px var(--shadow);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    box-shadow: 0 18px 45px var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px var(--shadow);
+    transform: translateY(-3px);
+    border-color: rgba(167, 139, 250, 0.4);
+    box-shadow: 0 20px 60px var(--shadow);
 }
 
 .card h2 {
     color: var(--violet-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.85rem;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .card p {
     color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 0.5rem 0;
+    line-height: 1.7;
+    margin: 0.35rem 0;
+    font-size: 0.95rem;
 }
 
 .card ul {
@@ -410,11 +420,59 @@ body.dark-mode {
 }
 
 .card ul li {
-    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
-.card ul li strong {
-    color: var(--violet-color);
+.card ul li input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--input-bg);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid var(--border-color);
+    border-radius: 0.25em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card ul li input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--violet-color);
+    background-color: var(--violet-color);
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.card ul li input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.card ul li input[type="checkbox"]:checked {
+    border-color: var(--violet-color);
+}
+
+.card ul li input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid var(--violet-light);
+    outline-offset: max(2px, 0.15em);
+}
+
+.card ul li label {
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
 }
 
 /* Code Block */
@@ -428,6 +486,7 @@ body.dark-mode {
 }
 
 .code-block code {
+    flex: 1;
     color: #d4d4d4;
     font-family: 'JetBrains Mono', SFMono-Regular, Consolas, Menlo, monospace;
     font-size: 0.95rem;
@@ -524,7 +583,7 @@ body.dark-mode {
 }
 
 .card.collapsible .card-header {
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -533,12 +592,19 @@ body.dark-mode {
     transition: background 0.3s ease;
 }
 
+/* Pas de changement visuel au survol du header de card */
 .card.collapsible .card-header:hover {
-    background: rgba(139, 92, 246, 0.05);
+    background: transparent;
 }
 
-.card.collapsible .card-header h2 {
+.card.collapsible .card-header h3 {
     margin: 0;
+}
+
+/* Assure que les titres scrollés ne passent pas sous la navbar */
+.card.collapsible .card-header h2,
+.card.collapsible .card-header h3 {
+    scroll-margin-top: 140px;
 }
 
 .collapse-icon {
@@ -678,4 +744,61 @@ body.dark-mode {
     line-height: 1.6;
     margin: 0.5rem 0 0 0;
     font-size: 0.95rem;
+}
+
+/* Checkbox Styles */
+.card ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.card ul li input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--input-bg);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid var(--border-color);
+    border-radius: 0.25em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card ul li input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--violet-color);
+    background-color: var(--violet-color);
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.card ul li input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.card ul li input[type="checkbox"]:checked {
+    border-color: var(--violet-color);
+}
+
+.card ul li input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid var(--violet-light);
+    outline-offset: max(2px, 0.15em);
+}
+
+.card ul li label {
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
 }

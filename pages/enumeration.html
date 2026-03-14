@@ -1,14 +1,14 @@
-﻿<h1>Énumération</h1>
+﻿<h2 style="margin: 30px 0 30px 0;">Énumération</h2>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Nmap</h2>
+        <h3>Nmap</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>nmap -p- --min-rate 10000 <span class="variable" data-var="target">TARGET</span></code>
+                <code>nmap -sV -Pn <span class="variable" data-var="target">TARGET</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -16,11 +16,12 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Scan rapide de tous les ports (65535)</p>
+            <p class="cmd-description">Scan rapide des ports</p>
         </div>
+
         <div class="cmd-item">
             <div class="code-block">
-                <code>nmap -sC -sV -O -p22,80,443 <span class="variable" data-var="target">TARGET</span></code>
+                <code>nmap -p- --min-rate 5000 -Pn -oN <span class="variable" data-var="target">TARGET</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -28,16 +29,12 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Scan détaillé sur ports spécifiques<br>
-                <strong>-sC</strong> : Scripts par défaut (détecte les accès anonymes FTP, partages SMB...)<br>
-                <strong>-sV</strong> : Détection des versions exactes (crucial pour chercher des exploits sur
-                SearchSploit)<br>
-                <strong>-O</strong> : Détection de l'OS
-            </p>
+            <p class="cmd-description">Scan rapide des TOUS les ports</p>
         </div>
+
         <div class="cmd-item">
             <div class="code-block">
-                <code>nmap -sU -sV --top-ports 20 <span class="variable" data-var="target">TARGET</span></code>
+                <code>nmap -A -sC -T4 -n -Pn -p 22,80,8443 <span class="variable" data-var="target">TARGET</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -45,26 +42,14 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Scan UDP des 20 ports les plus courants</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>nmap -sC -sV -O -p- --min-rate 5000 -oN nmap.txt <span class="variable" data-var="target">TARGET</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Scan complet avec tous les ports, scripts, versions et OS + sauvegarde</p>
+            <p class="cmd-description">Scan détaillé sur des ports spécifiques</p>
         </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>WhatWeb</h2>
+        <h3>WhatWeb</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -80,42 +65,18 @@
             </div>
             <p class="cmd-description">Identification des technologies web (CMS, frameworks, serveurs)</p>
         </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>whatweb -v <span class="variable" data-var="url">URL</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Mode verbose avec plus de détails</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>whatweb -a 3 <span class="variable" data-var="url">URL</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Agressivité niveau 3 (analyse approfondie)</p>
-        </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>WhoIs</h2>
+        <h3>Curl</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>whois <span class="variable" data-var="target">TARGET</span></code>
+                <code>curl -I <span class="variable" data-var="url">URL</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -123,11 +84,12 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Informations sur le propriétaire du domaine/IP</p>
+            <p class="cmd-description">Récupérer les en-têtes HTTP pour identifier les techno (Apache, Nginx)</p>
         </div>
+
         <div class="cmd-item">
             <div class="code-block">
-                <code>whois <span class="variable" data-var="url">URL</span> | grep -i "name\|email\|phone"</code>
+                <code>curl -X OPTIONS -v <span class="variable" data-var="url">URL</span>/uploads/</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -135,161 +97,27 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Extraire les contacts du domaine</p>
+            <p class="cmd-description">Chercher les méthodes HTTP autorisées (si PUT -> essayer d'upload un shell)</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>curl -T shell.php <span class="variable" data-var="url">URL</span>/uploads/</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Upload d'un shell sur le serveur</p>
         </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Gobuster</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Bruteforce de répertoires</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> -x php,html,txt,js</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Recherche avec extensions de fichiers spécifiques</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> -t 50 -b 404,403</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">50 threads en excluant les codes 404 et 403</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Feroxbuster</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>feroxbuster -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Bruteforce récursif automatique</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>feroxbuster -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> -x php,txt,html -t 100</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Recherche rapide avec extensions et 100 threads</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>feroxbuster -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> --depth 3 --filter-status 404</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Récursion niveau 3 en filtrant les 404</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Ffuf</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Fuzzing de répertoires (très rapide)</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span> -fc 404,403</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Filtrer les codes de réponse 404 et 403</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/?FUZZ=test -w <span class="variable" data-var="wordlist">WORDLIST</span> -fs 1234</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Fuzzing de paramètres GET en filtrant par taille de réponse</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span> -H "Host: FUZZ.domain.com" -w <span class="variable" data-var="wordlist">WORDLIST</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Fuzzing de sous-domaines (VHOST)</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Dirb</h2>
+        <h3>Dirb</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -305,6 +133,7 @@
             </div>
             <p class="cmd-description">Scan de répertoires classique</p>
         </div>
+
         <div class="cmd-item">
             <div class="code-block">
                 <code>dirb <span class="variable" data-var="url">URL</span> -X .php,.txt,.html</code>
@@ -322,7 +151,133 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Wfuzz</h2>
+        <h3>Ffuf</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Fuzzing rapide de répertoires</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span> -fc 404,403</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Filtrer les codes de réponse 404 et 403</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>ffuf -u <span class="variable" data-var="url">URL</span>/?FUZZ=test -w <span class="variable" data-var="wordlist">WORDLIST</span> -fs 1234</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Fuzzing de paramètres GET en filtrant par taille de réponse</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -e .zip,.bak,.php,.txt,.js,.php.bak,.php.swp,.sql,.env,.config,.old -w <span class="variable" data-var="wordlist">WORDLIST</span> -fc 404,403 -ic</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Fuzzing d'extensions de fichiers</p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Hakrawler</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Crawler simple pour découvrir les liens et endpoints (-u pour unique à la fin)</p>
+        </div>
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler -js -subs</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Extraction des fichiers JS et sous-domaines</p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Gobuster</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Bruteforce de répertoires</p>
+        </div>
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> -x php,html,txt,js -t 50 -b 404,403</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Recherche avec extensions de fichiers spécifiques et 50 threads en excluant les codes 404 et 403</p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Wfuzz</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -361,138 +316,6 @@
                 </button>
             </div>
             <p class="cmd-description">Bruteforce de mot de passe en POST</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Hakrawler</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Crawler simple pour découvrir les liens et endpoints</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler -d 3 -u</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Profondeur 3 avec URLs uniques uniquement</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler -js -subs</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Extraction des fichiers JS et sous-domaines</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>SMB Enumeration</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>smbclient -L //<span class="variable" data-var="target">TARGET</span> -N</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Liste les partages SMB sans authentification</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>enum4linux -a <span class="variable" data-var="target">TARGET</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Énumération complète SMB (utilisateurs, partages, groupes)</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Énumération DNS</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>dig axfr @<span class="variable" data-var="target">TARGET</span> domain.com</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Tentative de transfert de zone DNS</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>dnsenum --dnsserver <span class="variable" data-var="target">TARGET</span> domain.com</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Énumération DNS complète</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Énumération LDAP</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>ldapsearch -x -H ldap://<span class="variable" data-var="target">TARGET</span> -b "DC=domain,DC=com"</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Requête LDAP basique</p>
         </div>
     </div>
 </div>

