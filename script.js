@@ -546,6 +546,14 @@ function applySyntaxHighlighting() {
         });
         
         if (!plainText.trim()) return;
+
+        // Si le code contient des chevrons (< ou >), on ne touche pas
+        // au contenu pour éviter de "réactiver" des payloads HTML/JS
+        // comme <script>alert('XSS')</script>.
+        if (plainText.includes('<') || plainText.includes('>')) {
+            codeElement.dataset.highlighted = 'true';
+            return;
+        }
         
         // Apply syntax highlighting with regex patterns
         let highlightedText = plainText;
