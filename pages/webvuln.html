@@ -442,7 +442,7 @@
     </div>
     <div class="card-content">
         <p class="cmd-description">Cible: Les en-têtes</p>
-        <p class="cmd-description">Action : Vérifier si l'API accepte des origines arbitraires.</p>
+        <p class="cmd-description">Action : Vérifier si l'API accepte des origines arbitraires</p>
         <div class="cmd-item">
             <div class="code-block">
                 <code>curl -H "Origin: http://corsfind.com" -I <span class="variable" data-var="url">URL</span></code>
@@ -464,8 +464,8 @@
     </div>
     <div class="card-content">
         <div class="cmd-item">
-            <p class="cmd-description">Cible : Paramètres chargeant une URL (?url=, ?proxy=, ?api=).</p>
-            <p class="cmd-description">Action :Tenter d'accéder à l'interface localhost ou des ports internes (22, 3306, 8080).</p>
+            <p class="cmd-description">Cible : Partout où le site demande une url (?url=, ?proxy=, ?api=)</p>
+            <p class="cmd-description">Action : Tenter d'accéder à l'interface localhost ou des ports internes (22, 3306, 8080)</p>
         </div>
         <div class="code-block">
             <code>?url=http://127.0.0.1:80</code>
@@ -475,32 +475,6 @@
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
             </button>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h3>Insecure Deserialization</h3>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <p class="cmd-description">Cible : Cookies ou paramètres en Base64 contenant des objets sérialisés (PHP, Python, Java)</p>
-        <div class="cmd-item">
-            <p class="cmd-description">Signature PHP : <code>O:4:"User":2:{s:8:"username";s:5:"admin"...}</code></p>
-            <p class="cmd-description">Action : Décoder le Base64, modifier les valeurs (ex: <code>is_admin</code> de 0 à 1), ré-encoder</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>phpggc <span class="variable" data-var="gadget">GADGET_CHAIN</span> <span class="variable" data-var="func">FUNCTION</span> <span class="variable" data-var="cmd">COMMAND</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Génération de payload pour PHP (si la version/framework est connu)</p>
         </div>
     </div>
 </div>
