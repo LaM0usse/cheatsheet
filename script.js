@@ -399,6 +399,7 @@ async function loadPageContent(pageId) {
         'home': 'pages/home.html',
         'enumeration': 'pages/enumeration.html',
         'webvuln': 'pages/webvuln.html',
+        'exploitation': 'pages/exploitation.html',
         'shells': 'pages/shells.html',
         'other': 'pages/other.html'
     };
