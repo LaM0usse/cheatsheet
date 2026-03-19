@@ -19,10 +19,104 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h3>Reconnaissance</h3>
+        <h3>Méthodologie par type d'input</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
+        <table class="methodology-table">
+            <thead>
+                <tr>
+                    <th>Élément / Input</th>
+                    <th>Ce qu'il faut chercher</th>
+                    <th>Tests rapides de détection</th>
+                    <th>Cibles typiques</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Paramètre ID (?id=)</td>
+                    <td>IDOR<br>SQLi<br>Bypass d'authentification</td>
+                    <td>id=124 (incrément)<br>id=1' (erreur)</td>
+                    <td>Profils, Factures,Messages privés</td>
+                </tr>
+                <tr>
+                    <td>Paramètre Page (?p=)</td>
+                    <td>LFI<br>RFI<br>Open redirect</td>
+                    <td>../../etc/passwd<br>php://filter/...</td>
+                    <td>Menus, Includes, Chargement de vues</td>
+                </tr>
+                <tr>
+                    <td>Champ de recherche</td>
+                    <td>SQLi<br>XSS reflected<br>SSTI</td>
+                    <td>' OR 1=1--<br>&lt;u&gt;test&lt;/u&gt;<br>{{7*7}}</td>
+                    <td>Moteurs internes, listes de produits</td>
+                </tr>
+                <tr>
+                    <td>Formulaire de login</td>
+                    <td>SQLi<br>NoSQLi<br>Énumération d'utilisateurs</td>
+                    <td>admin' --<br>{"$gt":""}</td>
+                    <td>Panneaux d'administration, accès clients</td>
+                </tr>
+                <tr>
+                    <td>Upload de fichier</td>
+                    <td>RCE<br>Path traversal<br>SVG/XXE</td>
+                    <td>.phtml<br>filename="../../shell.php"</td>
+                    <td>Photos, Avatars, Documents, Logos</td>
+                </tr>
+                <tr>
+                    <td>Champs de texte</td>
+                    <td>XSS stored<br>SSTI<br>Injection HTML</td>
+                    <td>&lt;script&gt;alert(1)&lt;/script&gt;<br>${7*7}</td>
+                    <td>Commentaires, Bio, Tickets support</td>
+                </tr>
+                <tr>
+                    <td>Fonctions réseau</td>
+                    <td>Command injection<br>SSRF</td>
+                    <td>; id<br>http://127.0.0.1:22</td>
+                    <td>Ping, DNS lookup, Traceroute</td>
+                </tr>
+                <tr>
+                    <td>Fichiers XML / API</td>
+                    <td>XXE</td>
+                    <td>&lt;!ENTITY xxe SYSTEM &quot;file:///etc/passwd&quot;&gt;</td>
+                    <td>Imports de données, requêtes SOAP</td>
+                </tr>
+                <tr>
+                    <td>Cookies / sessions</td>
+                    <td>Désérialisation<br>IDOR<br>Élévation de privilèges</td>
+                    <td>Décoder le Base64 (O:4:&quot;User&quot;...)</td>
+                    <td>Session active, préférences utilisateur</td>
+                </tr>
+                <tr>
+                    <td>Headers HTTP</td>
+                    <td>SQLi<br>CORS<br>Injection User-Agent</td>
+                    <td>Origin: evil.com<br>' dans User-Agent</td>
+                    <td>Logs de connexion, Statistiques</td>
+                </tr>
+                <tr>
+                    <td>Actions sensibles</td>
+                    <td>CSRF<br>Absence / faiblesse de token</td>
+                    <td>Vérifier l'absence de csrf_token<br>Tester la non-vérification côté serveur</td>
+                    <td>Changement de mot de passe, Suppression de compte</td>
+                </tr>
+                <tr>
+                    <td>URL Anchor (#)</td>
+                    <td>DOM-based XSS</td>
+                    <td>#&lt;img src=x onerror=alert(1)&gt;</td>
+                    <td>Langues, Onglets JS, Redirections client</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Mémo rapide</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <h4 style="margin: 10px 0;">Reconnaissance</h4>
         <ul>
             <li>
                 <input type="checkbox" id="check7">
@@ -38,30 +132,26 @@
             </li>
             <li>
                 <input type="checkbox" id="check10">
-                <label for="check10">gobuster dir -u http://TARGET -w /usr/share/wordlists/dirb/common.txt -x php,html,txt</label>
+                <label for="check10">gobuster dir -u http://TARGET -w /usr/share/wordlists/dirb/common.txt -x
+                    php,html,txt</label>
             </li>
             <!-- /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-files.txt -->
             <li>
                 <input type="checkbox" id="check11">
-                <label for="check11">ffuf -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -u http://jubula/FUZZ -e .zip,.bak,.tar.gz,.txt,.old,.php,.json</label>
+                <label for="check11">ffuf -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -u
+                    http://jubula/FUZZ -e .zip,.bak,.tar.gz,.txt,.old,.php,.json</label>
             </li>
             <li>
-                <input type="checkbox" id="check12"><label for="check12">echo "http://192.168.64.62" | hakrawler -u -proxy http://127.0.0.1:8080</label>
+                <input type="checkbox" id="check12"><label for="check12">echo "http://192.168.64.62" | hakrawler -u
+                    -proxy http://127.0.0.1:8080</label>
             </li>
             <li>
                 <input type="checkbox" id="check13">
                 <label for="check13">echo "http://192.168.64.62" | hakrawler -u -proxy http://127.0.0.1:8080</label>
             </li>
         </ul>
-    </div>
-</div>
 
-<div class="card collapsible">
-    <div class="card-header">
-        <h3>Identification vulnérabilités</h3>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
+        <h4 style="margin: 10px 0;">Identification vulnérabilités</h4>
         <ul>
             <li>
                 <input type="checkbox" id="check14">
@@ -76,15 +166,8 @@
                 <label for="check16">XSS sur tous les inputs texte</label>
             </li>
         </ul>
-    </div>
-</div>
 
-<div class="card collapsible">
-    <div class="card-header">
-        <h3>Exécution shell</h3>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
+        <h4 style="margin: 10px 0;">Exécution shell</h4>
         <ul>
             <li>
                 <input type="checkbox" id="check17">
@@ -103,15 +186,8 @@
                 <label for="check20">find / -name proof.txt 2>/dev/null</label>
             </li>
         </ul>
-    </div>
-</div>
 
-<div class="card collapsible">
-    <div class="card-header">
-        <h3>Flags</h3>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
+        <h4 style="margin: 10px 0;">Flags à trouver</h4>
         <ul>
             <li>
                 <input type="checkbox" id="check21">

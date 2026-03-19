@@ -475,6 +475,35 @@ body.dark-mode {
     user-select: none;
 }
 
+/* Methodology Table */
+.methodology-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.methodology-table th,
+.methodology-table td {
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.methodology-table thead th {
+    background: rgba(139, 92, 246, 0.08);
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.methodology-table tbody tr:nth-child(even) {
+    background: rgba(148, 163, 184, 0.06);
+}
+
+.methodology-table tbody tr:hover {
+    background: rgba(139, 92, 246, 0.05);
+}
+
 /* Code Block */
 .code-block {
     background: hsla(var(--md-hue), 20%, 10%, 1);
