@@ -9,6 +9,7 @@
     /* Mode clair : gris très léger + texte adouci */
     --bg-gradient-start: #f4f5f7;
     --bg-gradient-end: #e9ecf1;
+    --bg-gradient-final: #e9ecf1;
     --text-color: #151518;
     --text-secondary: #6b7280;
     --card-bg: #fdfdfd;
@@ -24,7 +25,7 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-    background: radial-gradient(circle at top, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 55%, #020617 100%);
+    background: radial-gradient(circle at top, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     min-height: 100vh;
     color: var(--text-color);
     font-size: 15px;
@@ -54,6 +55,7 @@ pre {
 body.dark-mode {
     --bg-gradient-start: #050816;
     --bg-gradient-end: #020617;
+    --bg-gradient-final: #020617;
     --text-color: #e5e7eb;
     --text-secondary: #9ca3af;
     --card-bg: #0b1120;

@@ -307,12 +307,19 @@ function loadTheme() {
     const savedTheme = localStorage.getItem('cheatsheet-theme');
     const moonIcon = document.querySelector('.moon-icon');
     const sunIcon = document.querySelector('.sun-icon');
-    
-    if (savedTheme === 'dark') {
+    const prefersDark = !savedTheme || savedTheme === 'dark';
+
+    if (prefersDark) {
         document.body.classList.add('dark-mode');
         if (moonIcon && sunIcon) {
             moonIcon.style.display = 'none';
             sunIcon.style.display = 'block';
+        }
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (moonIcon && sunIcon) {
+            moonIcon.style.display = 'block';
+            sunIcon.style.display = 'none';
         }
     }
 }
