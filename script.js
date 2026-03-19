@@ -10,10 +10,14 @@ let config = {
     dirlist: ''
 };
 
+// Collapse state storage (par page / par carte)
+let collapseState = {};
+
 // Load configuration from localStorage on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadConfig();
     loadTheme();
+    loadCollapseState();
     setupNavigation(); // Moved here
     setupInputEvents();
     setupClearButton();
@@ -148,6 +152,28 @@ function loadConfig() {
         }
     } catch (error) {
         console.error('Erreur lors du chargement:', error);
+    }
+}
+
+// Load collapse state from localStorage
+function loadCollapseState() {
+    try {
+        const savedState = localStorage.getItem('cheatsheet-collapse');
+        if (savedState) {
+            collapseState = JSON.parse(savedState);
+        }
+    } catch (error) {
+        console.error('Erreur lors du chargement de l\'état des cartes:', error);
+        collapseState = {};
+    }
+}
+
+// Save collapse state to localStorage
+function saveCollapseState() {
+    try {
+        localStorage.setItem('cheatsheet-collapse', JSON.stringify(collapseState));
+    } catch (error) {
+        console.error('Erreur lors de la sauvegarde de l\'état des cartes:', error);
     }
 }
 
@@ -339,6 +365,16 @@ function updateSidebar() {
             // Si c'est une card «collapsible», on l'ouvre
             if (card.classList.contains('collapsible')) {
                 card.classList.remove('collapsed');
+
+                // Mettre à jour l'état sauvegardé pour cette carte
+                const activePage = document.querySelector('.page.active');
+                const pageId = activePage ? activePage.id : null;
+                const cardId = card.dataset.cardId || heading.id;
+                if (pageId && cardId) {
+                    if (!collapseState[pageId]) collapseState[pageId] = {};
+                    collapseState[pageId][cardId] = false; // ouverte
+                    saveCollapseState();
+                }
             }
 
             // Laisser le navigateur gérer le scroll via l'ancre
@@ -428,7 +464,7 @@ async function loadPageContent(pageId) {
         // Reinitialize components
         updateVariables();
         updateSidebar();
-        setupCollapsibleCards();
+        setupCollapsibleCards(pageId);
         setupCopyButtons();
         applySyntaxHighlighting();
         
@@ -449,20 +485,48 @@ async function loadPageContent(pageId) {
     }
 }
 
-// Setup collapsible cards
-function setupCollapsibleCards() {
+// Setup collapsible cards (fermer par défaut + persistance par page)
+function setupCollapsibleCards(pageId) {
     const collapsibleCards = document.querySelectorAll('.card.collapsible');
-    
-    collapsibleCards.forEach(card => {
+    if (!pageId) {
+        const activePage = document.querySelector('.page.active');
+        pageId = activePage ? activePage.id : 'default';
+    }
+
+    const pageState = collapseState[pageId] || {};
+
+    collapsibleCards.forEach((card, index) => {
         const header = card.querySelector('.card-header');
-        
+        const heading = card.querySelector('.card-header h2, .card-header h3');
+
+        // Identifiant stable pour la carte (basé sur le titre si possible)
+        let cardId = heading && heading.id ? heading.id : `${pageId}-card-${index}`;
+        card.dataset.cardId = cardId;
+
+        // État initial : si on a déjà quelque chose en mémoire on le respecte, sinon on ferme
+        const hasStoredState = Object.prototype.hasOwnProperty.call(pageState, cardId);
+        const shouldBeCollapsed = hasStoredState ? pageState[cardId] : true;
+
+        if (shouldBeCollapsed) {
+            card.classList.add('collapsed');
+        } else {
+            card.classList.remove('collapsed');
+        }
+
         if (header) {
             // Remove existing listeners to prevent duplicates
             const newHeader = header.cloneNode(true);
             header.parentNode.replaceChild(newHeader, header);
-            
+
             newHeader.addEventListener('click', () => {
                 card.classList.toggle('collapsed');
+
+                const nowCollapsed = card.classList.contains('collapsed');
+                const cid = card.dataset.cardId || cardId;
+
+                if (!collapseState[pageId]) collapseState[pageId] = {};
+                collapseState[pageId][cid] = nowCollapsed;
+                saveCollapseState();
             });
         }
     });
