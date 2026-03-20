@@ -478,3 +478,22 @@
         </div>
     </div>
 </div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>JWT</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>Cible : JWT</strong></p>
+            <p class="cmd-description">Reconnaissable par ses 3 parties séparées par des points (Header.Payload.Signature) et commençant souvent par <code>eyJ...</code></p>
+            <p class="cmd-description">Si le token finit par <code>=</code> ou <code>==</code>, c'est probablement du Base64. À décoder pour voir le contenu brut.</p>
+            <p class="cmd-description">Comparer les tokens de deux sessions différentes. Si seule la fin change de façon logique c'est une potentielle IDOR : Session 1: USR-1001 | Session 2: USR-1002</p>
+            <div class="code-block">
+                <code>Format : xxxxx.yyyyy.zzzzz</code>
+            </div>
+            <p class="cmd-description">Outil d'analyse en ligne : <a href="https://jwt.io" target="_blank" style="color: #00e676;">https://jwt.io</a></p>
+        </div>
+    </div>
+</div>

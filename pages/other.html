@@ -127,16 +127,180 @@
 
 <div class="card collapsible">
     <div class="card-header">
-        <h3>Encodages utiles</h3>
+        <h3>CeWL - Génération de Wordlist</h3>
         <span class="collapse-icon">▼</span>
     </div>
     <div class="card-content">
         <div class="cmd-item">
+            <p class="cmd-description"><strong>1. Génération standard (OSWA Optimized)</strong></p>
             <div class="code-block">
-                - `%2f` (barre oblique « / »)
-                - `%20` (espace simple « " »)
-                - `%3D` (signe égal « "=" »).
+                <code>cewl -w wl.txt -m 4 --lowercase -d 2 http://<span class="variable" data-var="target">TARGET</span></code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
             </div>
+            <p class="cmd-description">Crawl 2 niveaux, mots de 4+ lettres, tout en minuscules.</p>
+        </div>
+
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>2. Extraction d'emails</strong></p>
+            <div class="code-block">
+                <code>cewl -e --email_file emails.txt -n http://<span class="variable" data-var="target">TARGET</span></code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Utile pour identifier des noms d'utilisateurs potentiels.</p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>John & Hashcat - Hash Cracking</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>1. John The Ripper (Simple & Auto)</strong></p>
+            <div class="code-block">
+                <code>john --wordlist=wl.txt hash.txt</code>
+                <<button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">John détecte le format du hash automatiquement 90% du temps</p>
+        </div>
+
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>2. Hashcat (Plus rapide / GPU)</strong></p>
+            <div class="code-block">
+                <code>hashcat -m <span class="variable" data-var="mode">0</span> hash.txt wl.txt</code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Modes courants : <code>0</code> (MD5), <code>100</code> (SHA1), <code>1800</code>
+                (SHA512/Shadow)</p>
+        </div>
+
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>3. Bruteforce de Login (FFUF)</strong></p>
+            <div class="code-block">
+                <code>ffuf -u http://TARGET/login -X POST -d "user=admin&pass=FUZZ" -w wl.txt -fs <span class="variable" data-var="size">1234</span></code>
+                <button class="btn-copy" title="Copier la commande">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="cmd-description">Utilise la liste CeWL pour attaquer un formulaire en ligne.</p>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Encodages utiles (Bypass WAF)</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>Encoder dans Burp : Ctrl + U</strong></p>
+            <p class="cmd-description"><strong>Décoder dans Burp : Ctrl + Shift + U</strong></p>
+        </div>
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>URL Encoding (Basique)</strong></p>
+            <ul>
+                <li><code>%2f</code> (<code>/</code>)</li>
+                <li><code>%20</code> ou <code>+</code> (Espace)</li>
+                <li><code>%3d</code> (<code>=</code>)</li>
+                <li><code>%3f</code> (<code>?</code>)</li>
+                <li><code>%26</code> (<code>&</code>)</li>
+                <li><code>%23</code> (<code>#</code>)</li>
+                <li><code>%0a</code> ou <code>%0d</code> (Saut de ligne - utile pour Command Injection)</li>
+            </ul>
+        </div>
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>Double URL Encoding (Bypass avancé)</strong></p>
+            <ul>
+                <li><code>%252f</code> (<code>/</code>)</li>
+                <li><code>%253f</code> (<code>?</code>)</li>
+                <li><code>%252e%252e%252f</code> (<code>../</code> - Bypass LFI)</li>
+            </ul>
+        </div>
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>Null Byte & Divers</strong></p>
+            <ul>
+                <li><code>%00</code> (Null Byte - Arrête la lecture de chaîne)</li>
+                <li><code>%ef%bb%bf</code> (BOM UTF-8 - Parfois utilisé pour bypass les filtres de début de fichier)
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Recherche URL / Fichiers Sensibles</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>Standards</strong></p>
+            <ul>
+                <li><code>/robots.txt</code></li>
+                <li><code>/sitemap.xml</code></li>
+                <li><code>/.git/</code></li>
+                <li><code>/.env</code></li>
+                <li><code>/config.php.bak</code></li>
+                <li><code>/.htaccess</code></li>
+                <li><code>/web.config</code></li>
+            </ul>
+        </div>
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>Dev & Debug</strong></p>
+            <ul>
+                <li><code>/phpinfo.php</code></li>
+                <li><code>/test.php</code></li>
+                <li><code>/info</code></li>
+                <li><code>/console</code></li>
+                <li><code>/debug</code></li>
+                <li><code>/api/docs</code></li>
+                <li><code>/.vscode/</code></li>
+                <li><code>/.idea/</code></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card collapsible">
+    <div class="card-header">
+        <h3>Utilisateurs par défaut</h3>
+        <span class="collapse-icon">▼</span>
+    </div>
+    <div class="card-content">
+        <div class="cmd-item">
+            <p class="cmd-description"><strong>À tester sur les formulaires de login</strong></p>
+            <ul>
+                <li><code>admin</code> : <code>admin</code> / <code>password</code> / <code>admin123</code></li>
+                <li><code>guest</code> : <code>guest</code></li>
+                <li><code>root</code> : <code>root</code> / <code>toor</code></li>
+                <li><code>runtime</code> : <code>runtime</code></li>
+            </ul>
         </div>
     </div>
 </div>
