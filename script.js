@@ -648,9 +648,12 @@ function applySyntaxHighlighting() {
         // Comments (# ...), mais on ignore les payloads type #{7*7} (SSTI)
         highlightedText = highlightedText.replace(/(^|[^&])#(?!\{)([^<\n]*)/gm, '$1<span class="comment">#$2</span>');
         
-        // Strings in single or double quotes
-        highlightedText = highlightedText.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
+        // Strings in double or single quotes
+        // Important: traiter d'abord les doubles guillemets pour éviter
+        // que le regex n'interagisse avec les attributs class="string" ajoutés
+        // lors du surlignage des chaînes entre apostrophes.
         highlightedText = highlightedText.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
+        highlightedText = highlightedText.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
         
         // Flags (-x or --xxx)
         highlightedText = highlightedText.replace(/(\s|^)(--?[a-zA-Z0-9_-]+)(?=\s|$|<)/g, '$1<span class="flag">$2</span>');
