@@ -2,7 +2,6 @@
 let config = {
     ip: '',
     target: '',
-    url: '',
     port: '',
     user: '',
     password: '',
@@ -52,7 +51,7 @@ function setupNavigation() {
 
 // Setup input field events
 function setupInputEvents() {
-    const inputs = ['ip', 'target', 'url', 'port', 'user', 'password', 'wordlist', 'dirlist'];
+    const inputs = ['ip', 'target', 'port', 'user', 'password', 'wordlist', 'dirlist'];
     
     inputs.forEach(inputId => {
         const input = document.getElementById(inputId);
@@ -73,7 +72,7 @@ function setupClearButton() {
     if (clearBtn) {
         clearBtn.addEventListener('click', () => {
             // Clear all input fields
-            const inputs = ['ip', 'target', 'url', 'port', 'user', 'password', 'wordlist', 'dirlist'];
+            const inputs = ['ip', 'target', 'port', 'user', 'password', 'wordlist', 'dirlist'];
             
             inputs.forEach(inputId => {
                 const input = document.getElementById(inputId);
@@ -177,40 +176,8 @@ function saveCollapseState() {
     }
 }
 
-// Copy to clipboard functionality (deprecated - replaced by setupCopyButtons)
-// Keeping for backward compatibility with non-button code blocks
-document.addEventListener('click', (e) => {
-    const target = e.target;
-    
-    // Check if clicked on a code block that doesn't have a copy button
-    if ((target.classList.contains('code-block') || target.closest('.code-block')) && 
-        !target.classList.contains('btn-copy') && 
-        !target.closest('.btn-copy')) {
-        
-        const codeBlock = target.classList.contains('code-block') ? target : target.closest('.code-block');
-        const codeElement = codeBlock.querySelector('code');
-        
-        // Skip if this code block has a copy button
-        if (codeBlock.querySelector('.btn-copy')) return;
-        
-        if (codeElement) {
-            const code = codeElement.textContent;
-            
-            navigator.clipboard.writeText(code).then(() => {
-                // Visual feedback
-                const originalBg = codeBlock.style.background;
-                codeBlock.style.background = '#2d5016';
-                codeBlock.style.transition = 'background 0.3s ease';
-                
-                setTimeout(() => {
-                    codeBlock.style.background = originalBg || '';
-                }, 1000);
-            }).catch(err => {
-                console.error('Erreur de copie:', err);
-            });
-        }
-    }
-});
+// Ancienne logique de copie au clic sur le bloc de code supprimée :
+// désormais seule la pression sur le bouton .btn-copy déclenche la copie.
 
 // Add keyboard shortcuts
 document.addEventListener('keydown', (e) => {
