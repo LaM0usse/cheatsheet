@@ -55,7 +55,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>whatweb <span class="variable" data-var="url">URL</span></code>
+                <code>whatweb http://<span class="variable" data-var="target">TARGET</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -76,7 +76,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>curl -I <span class="variable" data-var="url">URL</span></code>
+                <code>curl -I http://<span class="variable" data-var="target">TARGET</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -89,7 +89,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>curl -X OPTIONS -v <span class="variable" data-var="url">URL</span>/uploads/</code>
+                <code>curl -X OPTIONS -v http://<span class="variable" data-var="target">TARGET</span>/uploads/</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -102,7 +102,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>curl -T shell.php <span class="variable" data-var="url">URL</span>/uploads/</code>
+                <code>curl -T shell.php http://<span class="variable" data-var="target">TARGET</span>/uploads/</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -123,7 +123,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>dirb <span class="variable" data-var="url">URL</span> <span class="variable" data-var="dirlist">DIRLIST</span></code>
+                <code>dirb http://<span class="variable" data-var="target">TARGET</span> <span class="variable" data-var="dirlist">DIRLIST</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -136,7 +136,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>dirb <span class="variable" data-var="url">URL</span> -X .php,.txt,.html</code>
+                <code>dirb http://<span class="variable" data-var="target">TARGET</span> -X .php,.txt,.html</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -157,7 +157,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
+                <code>ffuf -u http://<span class="variable" data-var="target">TARGET</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -170,7 +170,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span> -fc 404,403</code>
+                <code>ffuf -u http://<span class="variable" data-var="target">TARGET</span>/FUZZ -w <span class="variable" data-var="dirlist">DIRLIST</span> -fc 404,403</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -183,7 +183,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/?FUZZ=test -w <span class="variable" data-var="wordlist">WORDLIST</span> -fs 1234</code>
+                <code>ffuf -u http://<span class="variable" data-var="target">TARGET</span>/?FUZZ=test -w <span class="variable" data-var="wordlist">WORDLIST</span> -fs 1234</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -196,7 +196,7 @@
 
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u <span class="variable" data-var="url">URL</span>/FUZZ -e .zip,.bak,.php,.txt,.js,.php.bak,.php.swp,.sql,.env,.config,.old -w <span class="variable" data-var="wordlist">WORDLIST</span> -fc 404,403 -ic</code>
+                <code>ffuf -u http://<span class="variable" data-var="target">TARGET</span>/FUZZ -e .zip,.bak,.php,.txt,.js,.php.bak,.php.swp,.sql,.env,.config,.old -w <span class="variable" data-var="wordlist">WORDLIST</span> -fc 404,403 -ic</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -217,7 +217,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler</code>
+                <code>echo http://<span class="variable" data-var="target">TARGET</span> | hakrawler</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -229,7 +229,7 @@
         </div>
         <div class="cmd-item">
             <div class="code-block">
-                <code>echo <span class="variable" data-var="url">URL</span> | hakrawler -js -subs</code>
+                <code>echo http://<span class="variable" data-var="target">TARGET</span> | hakrawler -js -subs</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -250,7 +250,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
+                <code>gobuster dir -u http://<span class="variable" data-var="target">TARGET</span> -w <span class="variable" data-var="dirlist">DIRLIST</span></code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -262,7 +262,7 @@
         </div>
         <div class="cmd-item">
             <div class="code-block">
-                <code>gobuster dir -u <span class="variable" data-var="url">URL</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> -x php,html,txt,js -t 50 -b 404,403</code>
+                <code>gobuster dir -u http://<span class="variable" data-var="target">TARGET</span> -w <span class="variable" data-var="dirlist">DIRLIST</span> -x php,html,txt,js -t 50 -b 404,403</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -283,7 +283,7 @@
     <div class="card-content">
         <div class="cmd-item">
             <div class="code-block">
-                <code>wfuzz -c -w <span class="variable" data-var="dirlist">DIRLIST</span> <span class="variable" data-var="url">URL</span>/FUZZ</code>
+                <code>wfuzz -c -w <span class="variable" data-var="dirlist">DIRLIST</span> http://<span class="variable" data-var="target">TARGET</span>/FUZZ</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -295,7 +295,7 @@
         </div>
         <div class="cmd-item">
             <div class="code-block">
-                <code>wfuzz -c -w <span class="variable" data-var="wordlist">WORDLIST</span> --hc 404 <span class="variable" data-var="url">URL</span>?param=FUZZ</code>
+                <code>wfuzz -c -w <span class="variable" data-var="wordlist">WORDLIST</span> --hc 404 http://<span class="variable" data-var="target">TARGET</span>?param=FUZZ</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -307,7 +307,7 @@
         </div>
         <div class="cmd-item">
             <div class="code-block">
-                <code>wfuzz -c -w <span class="variable" data-var="wordlist">WORDLIST</span> -d "username=admin&password=FUZZ" <span class="variable" data-var="url">URL</span>/login</code>
+                <code>wfuzz -c -w <span class="variable" data-var="wordlist">WORDLIST</span> -d "username=admin&password=FUZZ" http://<span class="variable" data-var="target">TARGET</span>/login</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
