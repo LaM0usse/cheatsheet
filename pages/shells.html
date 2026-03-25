@@ -20,21 +20,23 @@
     <div class="card-content">
         <div class="cmd-item">
             <p class="cmd-description"><strong>1. Séparateurs de commandes (Linux/Windows)</strong></p>
-            <div class="code-block">
-                <code>;</code> <code>&amp;</code> <code>|</code> <code>&amp;&amp;</code> <code>||</code>
-                <code>%0a</code> (Saut de ligne)
-            </div>
-            <p class="cmd-description">Test : <code>; id</code> | <code>&amp; whoami</code> | <code>%0a id</code></p>
+            <div class="code-block"><code>;</code></div>
+            <div class="code-block"><code>&amp;</code></div>
+            <div class="code-block"><code>|</code></div>
+            <div class="code-block"><code>&amp;&amp;</code></div>
+            <div class="code-block"><code>||</code></div>
+            <div class="code-block"><code>%0a</code> (Saut de ligne)</div>
+            <p class="cmd-description">Exemples :</p>
+            <p class="cmd-description">; id</p>
+            <p class="cmd-description">&amp; whoami</p>
         </div>
 
         <div class="cmd-item">
             <p class="cmd-description"><strong>2. Bypasses de filtres (Espaces / Mots bloqués)</strong></p>
-            <div class="code-block">
-                <code>${IFS}</code> (Remplace l'espace : <code>cat${IFS}/etc/passwd</code>) <br>
-                <code>$()</code> ou <code>""</code> (Coupe les mots : <code>wh$()oami</code> ou <code>w"h"oami</code>)
-            </div>
-            <p class="cmd-description">Encapsulation (Linux) : <code>echo "User: $(whoami)"</code> ou <code>`id`</code>
-            </p>
+            <p class="cmd-description">Le but est de couper les commandes en utilisant des caractères spéciaux</p>
+            <div class="code-block"><code>${IFS}</code> Remplace l'espace : <code>cat${IFS}/etc/passwd</code></div>
+            <div class="code-block"><code>$()</code> Coupe les mots : <code>wh$()oami</code></div>
+            <div class="code-block"><code>""</code> Coupe les mots : <code>w"h"oami</code></div>
         </div>
     </div>
 </div>

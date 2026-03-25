@@ -11,8 +11,8 @@
             <li><input type="checkbox" id="check2"><label for="check2">Webcam</label></li>
             <li><input type="checkbox" id="check3"><label for="check3">OSID (OS-12345)</label></li>
             <li><input type="checkbox" id="check4"><label for="check4">Connexion au VPN</label></li>
-            <li><input type="checkbox" id="check5"><label for="check5">Mettre à jour /etc/hosts</label></li>
-            <li><input type="checkbox" id="check6"><label for="check6">Ouvrir Burp Suite</label></li>
+            <li><input type="checkbox" id="check5"><label for="check5">Mettre à jour /etc/hosts (optionnel)</label></li>
+            <li><input type="checkbox" id="check6"><label for="check6">Lancer Burp Suite</label></li>
         </ul>
     </div>
 </div>
@@ -107,96 +107,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-</div>
-
-<div class="card collapsible">
-    <div class="card-header">
-        <h3>Mémo rapide</h3>
-        <span class="collapse-icon">▼</span>
-    </div>
-    <div class="card-content">
-        <h4 style="margin: 10px 0;">Reconnaissance</h4>
-        <ul>
-            <li>
-                <input type="checkbox" id="check7">
-                <label for="check7">nmap -sV -Pn TARGET</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check8">
-                <label for="check8">curl -I http://TARGET</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check9">
-                <label for="check9">dirb http://TARGET</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check10">
-                <label for="check10">gobuster dir -u http://TARGET -w /usr/share/wordlists/dirb/common.txt -x
-                    php,html,txt</label>
-            </li>
-            <!-- /usr/share/wordlists/seclists/Discovery/Web-Content/raft-medium-files.txt -->
-            <li>
-                <input type="checkbox" id="check11">
-                <label for="check11">ffuf -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -u
-                    http://jubula/FUZZ -e .zip,.bak,.tar.gz,.txt,.old,.php,.json</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check12"><label for="check12">echo "http://192.168.64.62" | hakrawler -u
-                    -proxy http://127.0.0.1:8080</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check13">
-                <label for="check13">echo "http://192.168.64.62" | hakrawler -u -proxy http://127.0.0.1:8080</label>
-            </li>
-        </ul>
-
-        <h4 style="margin: 10px 0;">Identification vulnérabilités</h4>
-        <ul>
-            <li>
-                <input type="checkbox" id="check14">
-                <label for="check14">Payload universel input : '"><img src=x>{{7*7}}${7*7};sleep 5</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check15">
-                <label for="check15">SQLMap tous les paramètres GET/POST</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check16">
-                <label for="check16">XSS sur tous les inputs texte</label>
-            </li>
-        </ul>
-
-        <h4 style="margin: 10px 0;">Exécution shell</h4>
-        <ul>
-            <li>
-                <input type="checkbox" id="check17">
-                <label for="check17">Lancement serveur : nc -nlvp 9090</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check18">
-                <label for="check18">whoami</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check19">
-                <label for="check19">pwd</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check20">
-                <label for="check20">find / -name proof.txt 2>/dev/null</label>
-            </li>
-        </ul>
-
-        <h4 style="margin: 10px 0;">Flags à trouver</h4>
-        <ul>
-            <li>
-                <input type="checkbox" id="check21">
-                <label for="check21">local.txt (auth bypass)</label>
-            </li>
-            <li>
-                <input type="checkbox" id="check22">
-                <label for="check22">proof.txt (RCE → shell)</label>
-            </li>
-        </ul>
     </div>
 </div>

